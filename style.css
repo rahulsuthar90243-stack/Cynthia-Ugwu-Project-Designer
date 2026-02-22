@@ -4,9 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Primary';
-}
-
-#minicircle{
+}#minicircle {
     transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.4s;
     width: 10px;
     height: 10px;
@@ -22,9 +20,11 @@
     font-family: 'Primary';
     src: url(./image/GeneralSans-Regular.otf);
 }
-body{
+
+body {
     width: 100%;
-    height: 100vh; /* FIXED */
+    height: 100vh;
+    
 }
 
 #main{
