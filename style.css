@@ -4,7 +4,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Primary';
-}#minicircle {
+
+
+}
+#minicircle {
     transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.4s;
     width: 10px;
     height: 10px;
@@ -12,8 +15,25 @@
     z-index: 9999;
     mix-blend-mode: difference;
     border-radius: 50%;
-    position: absolute;
+    /* position: absolute; */
+    position: fixed; 
+ 
+}
 
+
+.grow{
+    width: 60px;
+    height: 60px;
+}
+
+.bounding{
+    width: fit-content;
+    overflow: hidden;
+}
+
+
+.bounding .boundingelem {
+    transform: translateY(100%);
 }
 
 @font-face {
@@ -73,6 +93,9 @@ body {
 }
 
 .blocktext{
+    display: flex;
+    align-items: end;
+    flex-direction: column;
     width: fit-content;
 }
 
@@ -83,6 +106,9 @@ body {
 }
 
 #available{
+    display: flex;
+    align-items: end;
+    flex-direction: column;
     margin-top: 130px;
     padding-right: 30px;
 }
@@ -110,12 +136,50 @@ body {
     color: #fff;
 }
 
-#scroll{
-    display: flex;
-    gap: 5px;
+#links a{
+    position: relative;  
+    display: inline-block; 
+    cursor: pointer;
+    /* transition: transform 0.4s ease; */
+
 }
 
-#links .scrollicon{
+/* #links a :hover{
+  transform: scale(2);
+} */
+
+
+#links a::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1.5px;
+    background-color: #fff;
+
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+/*  left → right show  */
+#links a:hover::after{
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* left → right hide */
+#links a:not(:hover)::after{
+    transform-origin: right;
+}
+#scroll{
+    display: flex;
+    gap: 4px;
+    color: black;
+}
+
+#scroll .scrollicon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,8 +187,56 @@ body {
     height: 25px;
     border-radius: 50%;
     background-color: #888;
-    color: black;
 }
+
+#scrollicon{
+    background-color: #fff;
+}
+
+
+.logo-wrapper{
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+    mask-image: linear-gradient(to right, 
+    transparent, 
+    black 10%, 
+    black 90%, 
+    transparent);
+}
+
+
+.logos{
+  display: flex;
+  gap: 80px;
+   opacity: 1;
+  /* align-items: center; */
+  width: max-content;
+  animation: scrollLogo 15s linear infinite;
+}
+
+
+
+.logos img{
+  height: 60px;
+  width: auto;
+   filter: brightness(0) invert(1);
+}
+
+/* Animation */
+@keyframes scrollLogo{
+  0%{
+    transform: translateX(0);
+  }
+  100%{
+    transform: translateX(-50%);
+  }
+}
+
+/* .logo-wrapper:hover .logos{
+  animation-play-state: paused;
+} */
+
 
 #second{
     padding: 0 3vw;
@@ -143,12 +255,28 @@ body {
     padding-right: 0;
     width: 100%;
     border-top: 1px solid #888;
+    cursor: pointer;
 }
+.move{
+    transition: transform 0.7s ease, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.elem:hover .move {
+    transform: translateX(20px);
+    opacity: 0.3;
+}
+
+/* 
+.elem:hover{
+    opacity: .7;
+    padding-left:30px;
+    transition: cubic-bezier(0.19, 1, 0.22, 1);
+} */
 
 .elem h1{
     text-transform: uppercase;
     opacity: .7;
-    font-size: 3vw;
     font-weight: 700;
     color: white;
     font-size: 7vw;
@@ -163,19 +291,26 @@ body {
 
 .elem img{
     opacity: 0;
+    top: 0;
+    left: 0;
     pointer-events: none;
     height: 140%;
     z-index: 999;
     position: absolute;
+    transform: translate(-50%, -50%);
 }
+
 .elem #btn span{
     font-size: 9px ;
     gap: 5px;
     opacity: .7;
 
 }
-.elem #btn{
-    display: flex;
+
+
+#btn{
+    margin-top: 70px;
+    display: inline-flex;
     color: #fff;
     font-size: 11px;
     border: 1.5px solid white;
@@ -183,8 +318,25 @@ body {
     border-radius: 29px;
     gap: 3px;
     margin-bottom: 50px;
-
+    transition: all 0.5s ease;
+    cursor: pointer;
 }
+
+
+#btn span{
+    opacity: .5;
+}
+
+#btn:hover {
+    background-color: #fff;
+    color: black;
+}
+
+#btn span:hover {
+    opacity: 0;
+}
+
+
 
 .roller-section{
   background-color: black;
@@ -279,9 +431,16 @@ body {
     color: #fff;
     font-size: 12px;
     text-decoration: none;
-    white-space: nowrap
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.5s ease;
 }
 
+
+#textabout a:hover{
+ background-color: #fff;
+ color: black;
+}
 
 
 #subscribe{
